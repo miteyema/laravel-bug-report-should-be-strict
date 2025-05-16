@@ -1,7 +1,10 @@
 <?php
 
-test('the application returns a successful response', function () {
-    $response = $this->get('/');
+use App\Models\User;
+use Illuminate\Database\Eloquent\MissingAttributeException;
 
-    $response->assertStatus(200);
+test('you cannot access an attribute that does not exist', function () {
+    $this->expectException(MissingAttributeException::class);
+    $user = new User();
+    $user->access_attribute_that_does_not_exist;
 });
